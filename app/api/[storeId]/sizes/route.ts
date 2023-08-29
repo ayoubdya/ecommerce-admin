@@ -49,7 +49,7 @@ export const GET = async (
           // userId,
         },
       })
-      .Size();
+      .sizes();
     return NextResponse.json(sizes);
   } catch (err) {
     console.log("[STOREID_SIZES_GET]", err);
