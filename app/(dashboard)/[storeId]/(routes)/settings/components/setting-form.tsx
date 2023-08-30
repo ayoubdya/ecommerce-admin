@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
-import APIAlert from "@/components/api-alert";
-import { useOrigin } from "@/hooks/use-origin";
+// import APIAlert from "@/components/api-alert";
+// import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingFormProps {
   initialData: Store;
@@ -42,7 +42,7 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
 
   const { storeId } = useParams();
   const router = useRouter();
-  const origin = useOrigin();
+  // const origin = useOrigin();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -129,12 +129,12 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
+      {/* <Separator />
       <APIAlert
         title="TEST_TITLE"
         description={`${origin}/api/${storeId}`}
         variant="public"
-      />
+      /> */}
     </>
   );
 };

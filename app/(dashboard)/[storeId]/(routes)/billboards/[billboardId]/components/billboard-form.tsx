@@ -169,12 +169,12 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
+      {/* <Separator />
       <APIAlert
         title="TEST_TITLE"
         description={`${origin}/api/${storeId}/billboards/${billboardId}`}
         variant="public"
-      />
+      /> */}
     </>
   );
 };

@@ -23,8 +23,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
-import APIAlert from "@/components/api-alert";
-import { useOrigin } from "@/hooks/use-origin";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+// import APIAlert from "@/components/api-alert";
+// import { useOrigin } from "@/hooks/use-origin";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -37,13 +45,15 @@ interface SizeFormProps {
 
 type SizeFormValues = z.infer<typeof formSchema>;
 
+const SIZE_VALUES = ["S", "M", "L", "XL", "XXL"];
+
 const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { storeId, sizeId } = useParams();
   const router = useRouter();
-  const origin = useOrigin();
+  // const origin = useOrigin();
 
   const form = useForm<SizeFormValues>({
     resolver: zodResolver(formSchema),
@@ -145,13 +155,30 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Value</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={loading}
-                      placeholder="Size value"
-                      {...field}
-                    />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    disabled={loading}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a size"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectGroup>
+                        {SIZE_VALUES.map((size) => (
+                          <SelectItem value={size} key={size}>
+                            {size}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -162,12 +189,12 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
+      {/* <Separator />
       <APIAlert
         title="TEST_TITLE"
         description={`${origin}/api/${storeId}/sizes/${sizeId}`}
         variant="public"
-      />
+      /> */}
     </>
   );
 };
