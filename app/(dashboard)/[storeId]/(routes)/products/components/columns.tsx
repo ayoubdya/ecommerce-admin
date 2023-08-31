@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import ColorView from "@/components/color-view";
+import { CheckCircle2, XCircle } from "lucide-react";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -30,10 +31,14 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "isFeatured",
     header: "Featured",
+    cell: ({ row }) =>
+      row.original.isFeatured ? <CheckCircle2 /> : <XCircle />,
   },
   {
     accessorKey: "isArchived",
     header: "Archived",
+    cell: ({ row }) =>
+      row.original.isArchived ? <CheckCircle2 /> : <XCircle />,
   },
   {
     accessorKey: "category",

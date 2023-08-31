@@ -125,9 +125,9 @@ model Image {
 
 model Order {
   id        String   @id @default(uuid())
-  isPaid    Boolean
-  phone     String
-  address   String
+  isPaid    Boolean  @default(false)
+  phone     String   @default("")
+  address   String   @default("")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -139,7 +139,8 @@ model Order {
 }
 
 model OrderItem {
-  id String @id @default(uuid())
+  id       String @id @default(uuid())
+  quantity Int    @default(1)
 
   order     Order   @relation(fields: [orderId], references: [id])
   orderId   String

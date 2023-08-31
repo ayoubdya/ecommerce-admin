@@ -114,7 +114,7 @@ export const PATCH = async (
     });
     if (!storeByUserId)
       return new NextResponse("Unauthorized", { status: 401 });
-    prismadb.product.update({
+    await prismadb.product.update({
       where: {
         id: productId,
       },
@@ -124,8 +124,8 @@ export const PATCH = async (
         categoryId: categoryId || undefined,
         sizeId: sizeId || undefined,
         colorId: colorId || undefined,
-        isFeatured: isFeatured || undefined,
-        isArchived: isArchived || undefined,
+        isFeatured,
+        isArchived,
         images: {
           deleteMany: {},
           // createMany: {
