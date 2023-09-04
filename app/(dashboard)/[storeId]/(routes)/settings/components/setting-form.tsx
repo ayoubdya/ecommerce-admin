@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
-// import APIAlert from "@/components/api-alert";
-// import { useOrigin } from "@/hooks/use-origin";
+import APIAlert from "@/components/api-alert";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingFormProps {
   initialData: Store;
@@ -42,7 +42,7 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
 
   const { storeId } = useParams();
   const router = useRouter();
-  // const origin = useOrigin();
+  const origin = useOrigin();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -53,7 +53,6 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
     setLoading(true);
     try {
       const patch = await axios.patch(`/api/stores/${storeId}`, data);
-      console.log(patch.data);
       router.refresh();
       toast.success("Store updated");
     } catch (error) {
@@ -68,7 +67,6 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
     setLoading(true);
     try {
       const del = await axios.delete(`/api/stores/${storeId}`);
-      console.log(del);
       router.refresh();
       router.push("/");
       toast.success("Store deleted");
@@ -129,12 +127,12 @@ const SettingForm: React.FC<SettingFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      {/* <Separator />
+      <Separator />
       <APIAlert
-        title="TEST_TITLE"
+        title="NEXT_PUBLIC_API_URL"
         description={`${origin}/api/${storeId}`}
         variant="public"
-      /> */}
+      />
     </>
   );
 };

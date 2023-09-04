@@ -16,29 +16,17 @@ export type OrderColumn = {
 
 export const columns: ColumnDef<OrderColumn>[] = [
   {
-    accessorKey: "id",
-    header: "ID",
-  },
-  {
-    accessorKey: "total",
-    header: "Total",
-  },
-  {
     accessorKey: "products",
     header: "Products",
   },
   {
     accessorKey: "isPaid",
     header: "Paid",
-    cell: ({ row }) => (
-      <div className="flex items-center">
-        {row.original.isPaid ? (
-          <span className="text-green-500">Paid</span>
-        ) : (
-          <span className="text-red-500">Not Paid</span>
-        )}
-      </div>
-    ),
+    cell: ({ row }) => <div>{row.original.isPaid ? "Yes" : "No"}</div>,
+  },
+  {
+    accessorKey: "total",
+    header: "Total",
   },
   {
     accessorKey: "phone",

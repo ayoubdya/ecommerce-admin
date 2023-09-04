@@ -12,25 +12,8 @@ body,
   .debug {
     @apply border-dashed border border-red-700;
   }
-
-  .debug-blue {
-    @apply border-dashed border border-blue-700;
-  }
-
-  .debug-green {
-    @apply border-dashed border border-green-700;
-  }
-
-  .debug-yellow {
-    @apply border-dashed border border-yellow-700;
-  }
-
-  .debug-pink {
-    @apply border-dashed border border-pink-700;
-  }
-
 }
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;

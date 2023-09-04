@@ -23,13 +23,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AlertModal from "@/components/modals/alert-modal";
-import APIAlert from "@/components/api-alert";
-import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/image-upload";
 
 const formSchema = z.object({
   label: z.string().min(1),
-  imageUrl: z.string().min(1),
+  imageUrl: z.string().min(1, "Please upload an image"),
 });
 
 interface BillboardFormProps {
@@ -44,7 +42,6 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
 
   const { storeId, billboardId } = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
@@ -57,13 +54,11 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
   const onSubmit = async (data: BillboardFormValues) => {
     setLoading(true);
     try {
-      // let billboard;
       if (!initialData) {
         await axios.post(`/api/${storeId}/billboards`, data);
       } else {
         await axios.patch(`/api/${storeId}/billboards/${billboardId}`, data);
       }
-      // console.log(billboard.data);
       router.refresh();
       router.push(`/${storeId}/billboards`);
       toast.success(toastMsg);
@@ -73,14 +68,12 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
     } finally {
       setLoading(false);
     }
-    // console.log(data);
   };
 
   const onDelete = async () => {
     setLoading(true);
     try {
       await axios.delete(`/api/${storeId}/billboards/${billboardId}`);
-      // console.log(del);
       router.refresh();
       router.push(`/${storeId}/billboards`);
       toast.success("Billboard deleted.");

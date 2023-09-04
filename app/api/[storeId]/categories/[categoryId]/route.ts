@@ -63,6 +63,9 @@ export const GET = async (
         id: categoryId,
         storeId,
       },
+      include: {
+        billboard: true,
+      },
     });
     if (!category)
       return new NextResponse("Category not found", { status: 404 });

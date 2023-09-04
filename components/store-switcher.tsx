@@ -44,7 +44,6 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
 
   const [open, setOpen] = useState(false);
   const [value] = useState(storeId);
-  console.log("render", value);
 
   const formattedItems = items.map((item) => ({
     label: item.name,
@@ -52,7 +51,6 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
   }));
 
   const onStoreSelect = (storeId: string) => {
-    console.log("onStoreSelect", storeId);
     setOpen(false);
     router.push(`/${storeId}`);
   };
@@ -106,7 +104,6 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
             <CommandGroup>
               <CommandItem
                 onSelect={() => {
-                  console.log("onSelect");
                   setOpen(false);
                   storeModal.onOpen();
                 }}
